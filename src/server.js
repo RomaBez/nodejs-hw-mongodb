@@ -4,7 +4,7 @@ import pino from 'pino-http';
 
 import { env } from './utils/env.js';
 
-import { getAllStudents, getStudentById } from './services/students.js';
+import { getAllContacts, getContactById } from './services/students.js';
 
 export const setupServer = () => {
   const app = express();
@@ -19,20 +19,20 @@ export const setupServer = () => {
   app.use(cors());
   app.use(express.json());
 
-  app.get('/students', async (req, res) => {
-    const students = await getAllStudents();
+  app.get('/contacts', async (req, res) => {
+    const contacts = await getAllContacts();
     res.json({
       status: 200,
       message: 'Successfully found contacts!',
-      data: students,
+      data: contacts,
     });
   });
 
-  app.get('/students/:id', async (req, res) => {
+  app.get('/contacts/:id', async (req, res) => {
     const { id } = req.params;
-    const students = await getStudentById(id);
+    const contacts = await getContactById(id);
 
-    if (!students) {
+    if (!contacts) {
       res.status(404).json({
         message: 'Contact not found',
       });
@@ -42,7 +42,7 @@ export const setupServer = () => {
     res.json({
       status: 200,
       message: `Successfully found contact with id ${id}!`,
-      data: students,
+      data: contacts,
     });
   });
 
