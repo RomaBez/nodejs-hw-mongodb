@@ -1,5 +1,5 @@
 import { contactCollection } from '../db/models/Contact.js';
 
-export const getAllStudents = () => contactCollection.find();
+export const getAllContacts = () => contactCollection.find();
 
-export const getStudentById = (id) => contactCollection.findById(id);
+export const getContactById = (id) => contactCollection.findById(id);
