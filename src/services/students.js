@@ -14,14 +14,12 @@ export const updateContact = async (id, payload, options = {}) => {
     payload,
     {
       new: true,
-      includeResultMetadata: true,
       ...options,
     },
   );
   if (!rawResult) return null;
   return {
     contact: rawResult,
-    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
 };
 
