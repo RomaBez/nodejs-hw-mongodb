@@ -6,6 +6,7 @@ import {
   updateContact,
   deleteContact,
 } from '../services/students.js';
+import { addContactValidationScheme } from '../validation/contacts.js';
 
 export const getAllContactsController = async (req, res, next) => {
   const contacts = await getAllContacts();
@@ -32,6 +33,14 @@ export const getContactByIdController = async (req, res, next) => {
 };
 
 export const postContactController = async (req, res, next) => {
+  try {
+    await addContactValidationScheme.validateAsync(req.body, {
+      abortEarly: false,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+
   const data = await creatContact(req.body);
 
   res.status(201).json({
