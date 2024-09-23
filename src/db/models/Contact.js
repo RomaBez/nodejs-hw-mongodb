@@ -36,4 +36,14 @@ contactSchema.post('save', handleSaveError);
 contactSchema.pre('findOneAndUpdate', setUpdateOptions);
 contactSchema.post('findOneAndUpdate', handleSaveError);
 
+export const sortFields = [
+  'name',
+  'phoneNumber',
+  'email',
+  'isFavourite',
+  'contactType',
+  'createdAt',
+  'updatedAt',
+];
+
 export const contactCollection = model('contact', contactSchema);
