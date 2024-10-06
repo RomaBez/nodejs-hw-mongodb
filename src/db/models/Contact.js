@@ -7,6 +7,10 @@ import { handleSaveError, setUpdateOptions } from './hooks.js';
 
 const contactSchema = new Schema(
   {
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
