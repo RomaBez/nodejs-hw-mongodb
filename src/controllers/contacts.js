@@ -10,6 +10,7 @@ import { addContactValidationScheme } from '../validation/contacts.js';
 import parsePaginationParams from '../utils/parsePaginationParams.js';
 import parseSortParams from '../utils/parseSortParams.js';
 import parseContactFilterParams from '../utils/filters/parsContactFilterParams.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
 export const getAllContactsController = async (req, res, next) => {
   const { perPage, page } = parsePaginationParams(req.query);
@@ -56,10 +57,19 @@ export const postContactController = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error.message);
+    return res.status(400).json({ error: error.message });
   }
 
   const { _id: userId } = req.user;
-  const data = await creatContact({ ...req.body, userId });
+  const photo = req.file;
+
+  let photoUrl;
+
+  if (photo) {
+    photoUrl = await saveFileToCloudinary(photo);
+  }
+
+  const data = await creatContact({ ...req.body, userId, photo: photoUrl });
 
   res.status(201).json({
     status: 201,
@@ -71,8 +81,17 @@ export const postContactController = async (req, res, next) => {
 export const updateContactController = async (req, res, next) => {
   const { id } = req.params;
   const { _id: userId } = req.user;
+  const photo = req.file;
 
-  const updatedContact = await updateContact(userId, id, req.body);
+  let photoUrl;
+
+  if (photo) {
+    photoUrl = await saveFileToCloudinary(photo);
+  }
+
+  const updatedContact = await updateContact(userId, id, req.body, {
+    photo: photoUrl,
+  });
 
   if (!updatedContact) {
     throw createHttpError(404, 'Contact not found');
