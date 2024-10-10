@@ -60,7 +60,11 @@ export const userLogin = async (payload) => {
     throw createHttpError(401, 'Email or password invalid');
   }
 
-  await sessionCollection.deleteOne({ userId: userExist2.id });
+  // await sessionCollection.deleteOne({ userId: userExist2.id });
+
+  if (userExist2) {
+    await sessionCollection.deleteOne({ userId: userExist2.id });
+  }
 
   const sessionData = createSession();
 
@@ -129,7 +133,7 @@ export const requestResetToken = async ({ email }) => {
       html,
     });
   } catch (error) {
-    console.error('Email send error:', error); // Додано логування
+    console.error('Email send error:', error);
     throw createHttpError(
       500,
       'Failed to send the email, please try again later.',
