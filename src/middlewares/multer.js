@@ -16,7 +16,7 @@ const limits = { fileSize: 1024 * 1024 * 5 };
 const fileFilter = (req, file, callback) => {
   const extension = file.originalname.split('.').pop();
   if (extension === 'exe') {
-    return callback(createHttpError(400, '.exe is not valid'));
+    return callback(createHttpError(400, '.exe files are not valid'));
   }
   callback(null, true);
 };

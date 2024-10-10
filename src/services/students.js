@@ -42,7 +42,7 @@ export const getContactById = ({ id, userId }) =>
 
 export const creatContact = (payload) => contactCollection.create(payload);
 
-export const updateContact = async (id, userId, payload, options = {}) => {
+export const updateContact = async (userId, id, payload, options = {}) => {
   const rawResult = await contactCollection.findOneAndUpdate(
     {
       _id: id,

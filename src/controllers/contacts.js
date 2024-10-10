@@ -83,6 +83,8 @@ export const updateContactController = async (req, res, next) => {
   const { _id: userId } = req.user;
   const photo = req.file;
 
+  console.log('Updating contact:', { id, userId, body: req.body });
+
   let photoUrl;
 
   if (photo) {
@@ -94,6 +96,7 @@ export const updateContactController = async (req, res, next) => {
   });
 
   if (!updatedContact) {
+    console.log('Contact not found:', { id, userId });
     throw createHttpError(404, 'Contact not found');
   }
 
