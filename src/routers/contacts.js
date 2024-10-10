@@ -24,16 +24,16 @@ contactsRouter.get('/', ctrlWrapper(getAllContactsController));
 contactsRouter.get('/:id', isValidId, ctrlWrapper(getContactByIdController));
 contactsRouter.post(
   '/',
+  uploadPhoto.single('photo'),
   validateBody(addContactValidationScheme),
   ctrlWrapper(postContactController),
-  uploadPhoto.single('photo'),
 );
 contactsRouter.patch(
   '/:id',
   isValidId,
+  uploadPhoto.single('photo'),
   validateBody(patchContactValidationScheme),
   ctrlWrapper(updateContactController),
-  uploadPhoto.single('photo'),
 );
 contactsRouter.delete('/:id', isValidId, ctrlWrapper(deleteContactController));
 
