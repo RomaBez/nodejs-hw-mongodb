@@ -63,6 +63,9 @@ export const postContactController = async (req, res, next) => {
   const { _id: userId } = req.user;
   const photo = req.file;
 
+  console.log(req.body);
+  console.log(req.file);
+
   let photoUrl;
 
   if (photo) {
