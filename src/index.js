@@ -5,6 +5,7 @@ import { createDirIfNotExist } from './utils/createDirIfNotExists.js';
 
 const bootstrap = async () => {
   await initMongoConnection();
+  console.log('Temporary upload directory:', TEMP_UPLOAD_DIR);
   await createDirIfNotExist(TEMP_UPLOAD_DIR);
   await createDirIfNotExist(UPLOAD_DIR);
 

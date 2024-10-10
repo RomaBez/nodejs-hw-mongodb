@@ -63,8 +63,7 @@ export const postContactController = async (req, res, next) => {
   const { _id: userId } = req.user;
   const photo = req.file;
 
-  console.log(req.body);
-  console.log(req.file);
+  console.log('Received file:', req.file);
 
   let photoUrl;
 
@@ -86,7 +85,7 @@ export const updateContactController = async (req, res, next) => {
   const { _id: userId } = req.user;
   const photo = req.file;
 
-  console.log('Updating contact:', { id, userId, body: req.body });
+  console.log('Received file:', req.file);
 
   let photoUrl;
 

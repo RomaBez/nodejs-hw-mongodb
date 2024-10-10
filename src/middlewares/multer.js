@@ -4,9 +4,13 @@ import { TEMP_UPLOAD_DIR } from '../constants/index.js';
 import createHttpError from 'http-errors';
 
 const storage = multer.diskStorage({
-  destination: TEMP_UPLOAD_DIR,
+  destination: (req, file, callback) => {
+    console.log('File destination:', TEMP_UPLOAD_DIR);
+    callback(null, TEMP_UPLOAD_DIR);
+  },
   filename: (req, file, callback) => {
     const uniqueSuffix = Date.now();
+    console.log('Saving file as:', `${uniqueSuffix}_${file.originalname}`);
     callback(null, `${uniqueSuffix}_${file.originalname}`);
   },
 });
