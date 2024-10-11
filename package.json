@@ -6,13 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "build": "npm run build-docs",
+    "build-docs": "redocly bundle --ext json -o docs/swagger.json",
+    "preview-docs": "redocly preview-docs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.10.0",
+    "@redocly/cli": "^1.25.5",
     "eslint": "^9.10.0",
     "globals": "^15.9.0",
     "nodemon": "^3.1.4",
@@ -63,6 +67,7 @@
     "flat-cache": "^4.0.1",
     "flatted": "^3.3.1",
     "glob-parent": "^5.1.2",
+    "google-auth-library": "^9.14.2",
     "handlebars": "^4.7.8",
     "has-flag": "^3.0.0",
     "http-errors": "^2.0.0",
@@ -116,6 +121,7 @@
     "strip-ansi": "^6.0.1",
     "strip-json-comments": "^3.1.1",
     "supports-color": "^5.5.0",
+    "swagger-ui-express": "^5.0.1",
     "text-table": "^0.2.0",
     "to-regex-range": "^5.0.1",
     "touch": "^3.1.1",
