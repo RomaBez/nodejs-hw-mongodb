@@ -99,7 +99,8 @@ export const updateContactController = async (req, res, next) => {
     photoUrl = await saveToUploadDir(photo);
   }
 
-  const updatedContact = await updateContact(userId, id, req.body, {
+  const updatedContact = await updateContact(userId, id, {
+    ...req.body,
     photo: photoUrl,
   });
 
