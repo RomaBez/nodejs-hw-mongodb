@@ -19,6 +19,7 @@ const limits = { fileSize: 1024 * 1024 * 5 };
 
 const fileFilter = (req, file, callback) => {
   const extension = file.originalname.split('.').pop();
+  console.log('Uploading file:', file.originalname, 'Extension:', extension);
   if (extension === 'exe') {
     return callback(createHttpError(400, '.exe files are not valid'));
   }
